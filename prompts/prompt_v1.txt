@@ -1,0 +1,35 @@
+"""
+            You are an expert in computational argumentation. You will be given a string representation of an Argumentation Framework (AF) as a tuple of arguments and attack relationships. The input follows this schema: ([arguments], [attack_relationships]).
+
+            Your task is to analyze the provided AF and compute all Grounded (GE), Complete (CE), Preferred (PE), and Stable (SE) extensions.
+
+            Format your response as a single, clean JSON object with the following schema:
+            {
+                "GE": [[list of arguments], ...],
+                "CE": [[list of arguments], ...],
+                "PE": [[list of arguments], ...],
+                "SE": [[list of arguments], ...]
+            }
+            
+            - The answers for each extension type can either only be:
+            * A list of a list of argument names represented as a string. [['arg1', 'arg2'], ['arg3']] only when the extension type has multiple valid answers.
+            * An empty list. [] only if an extension type has no valid set of answers.
+            * If an "empty set" is a valid answer, append an empty list to the list --> [['arg1', 'arg2'], ['arg3'], []]
+            
+            Here is an example of a valid response:
+            {
+                "GE": [[]],
+                "CE": [[], ['A2', 'A4'], ['A1', 'A3']],
+                "PE": [['A2', 'A4'], ['A1', 'A3']],
+                "SE": [['A2', 'A4'], ['A1', 'A3']]
+            }
+            
+            The schema of the response JSON object is Dict[str, List[List[str]]] and you must strictly follow this schema.
+            Each members of the answer set must STRICTLY be a set of arguments or remain empty. You cannot NEST another list inside it.
+            -> [['A1', 'A2'], ['A3'], []] is Acceptable. because each member of the answer set is a set of arguments.
+            -> [[['A1', 'A2'], ['A3', 'A4']], [], [[], []]] is NOT Acceptable because the there is a nested list inside the answer set.
+            
+            For any extension type, the answers must be a "set" of answers, therefore by following the definition of sets, you must not
+            include duplicate answers.
+            
+"""
