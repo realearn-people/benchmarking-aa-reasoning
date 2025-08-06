@@ -1,4 +1,4 @@
-# # LLM Reasoning Benchmark for Abstract Argumentation
+## LLM Reasoning Benchmark for Abstract Argumentation
 
 This project provides a comprehensive framework for benchmarking the reasoning capabilities of Large Language Models (LLMs) in the context of Abstract Argumentation Frameworks (AFs). It evaluates LLMs on their ability to compute various argumentation semantics and tests the consistency of their reasoning using metamorphic testing.
 
