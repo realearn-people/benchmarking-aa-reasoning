@@ -11,12 +11,12 @@ from af_utils import (
 )
 
 # 1. Choose the LLM to test by initializing its client.
-gpt_4o = OpenAIClient(model_name="gpt-4o", timeout=300)
-o3 = OpenAIClient(model_name="o3", timeout=300)
-o4_mini = OpenAIClient(model_name="o4-mini", timeout=300)
-gemini_2_5_pro = GeminiClient(model_name="gemini-2.5-pro", timeout=3000)
-llama_3_8b = OllamaClient(model_name="llama3:8b", timeout=300)
-gemma_3_12b = OllamaClient(model_name="gemma3:12b", timeout=300)
+gpt_4o = OpenAIClient(model_name="gpt-4o", timeout=900)
+o3 = OpenAIClient(model_name="o3", timeout=900)
+o4_mini = OpenAIClient(model_name="o4-mini", timeout=900)
+gemini_2_5_pro = GeminiClient(model_name="gemini-2.5-pro", timeout=900)
+llama_3_8b = OllamaClient(model_name="llama3:8b", timeout=900)
+gemma_3_12b = OllamaClient(model_name="gemma3:12b", timeout=900)
 
 
 # 2. Define the parameters for the test run.
