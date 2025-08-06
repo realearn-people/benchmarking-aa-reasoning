@@ -32,7 +32,7 @@ Abstract argumentation is a key area of AI for modeling and reasoning about conf
 ├── src/
 │   ├── main.py           # Main script to configure and run the evaluation
 │   ├── LLM_Interface.py  # Interfaces for different LLM APIs (OpenAI, Gemini, Ollama)
-│   ├── LogicTester.py    # This class is used to test the logic of the testing framework, assuming that the LLM provided correct answers, there should not be any errors in the testing process.
+│   ├── LogicTester.py    # This class is used to test the logic of the testing framework, assuming that the LLM provided correct answers.
 │   ├── af_utils.py       # Utility functions for generating AFs and applying transformations
 │   ├── helper_classes.py # Helper classes used across the project
 │   └── report_generator.py # Generates Excel reports
