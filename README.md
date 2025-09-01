@@ -1,4 +1,4 @@
-# # LLM Reasoning Benchmark for Abstract Argumentation
+## LLM Reasoning Benchmark for Abstract Argumentation
 
 This project provides a comprehensive framework for benchmarking the reasoning capabilities of Large Language Models (LLMs) in the context of Abstract Argumentation Frameworks (AFs). It evaluates LLMs on their ability to compute various argumentation semantics and tests the consistency of their reasoning using metamorphic testing.
 
@@ -30,15 +30,26 @@ Abstract argumentation is a key area of AI for modeling and reasoning about conf
 ├── prompts/              # Contains system prompts for the LLMs
 ├── reports/              # Output directory for evaluation reports
 ├── src/
-│   ├── main.py           # Main script to configure and run the evaluation
-│   ├── LLM_Interface.py  # Interfaces for different LLM APIs (OpenAI, Gemini, Ollama)
-│   ├── LogicTester.py    # This class is used to test the logic of the testing framework, assuming that the LLM provided correct answers.
-│   ├── af_utils.py       # Utility functions for generating AFs and applying transformations
-│   ├── helper_classes.py # Helper classes used across the project
-│   └── report_generator.py # Generates Excel reports
+│   ├── main.py
+│   ├── LLM_Interface.py
+│   ├── LLM_tester.py
+│   ├── LogicTester.py
+│   ├── af_utils.py
+│   ├── test_af_utils.py
+│   └── ReportGenerator.py
 ├── requirements.txt      # Project dependencies
 └── README.md             # This file
 ```
+
+| File                     | Responsibility                                                                                                                              |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`main.py`**            | The main entry point for the application. Configures and initiates the evaluation process.                                                  |
+| **`LLM_Interface.py`**   | Contains the core classes that drive the evaluation: `LLMClient` (for API interaction), `VerificationSuite`, and `LLMTester`.               |
+| **`LLM_tester.py`**      | Orchestrates the evaluation process for a single LLM.                                                                                       |
+| **`LogicTester.py`**     | A specialized tester that uses ground-truth extensions instead of LLM outputs to verify that the verification logic itself is sound.        |
+| **`ReportGenerator.py`** | A dedicated module containing the `ReportGenerator` class, which uses `pandas` to export the final results into a multi-sheet Excel file.   |
+| **`af_utils.py`**        | A utility module containing functions to generate the six types of Argumentation Frameworks and apply the four metamorphic transformations. |
+| **`test_af_utils.py`**   | A suite of unit tests to ensure the correctness and reliability of the functions in `af_utils.py`. Run using python's unittest module.      |
 
 ## Setup
 
@@ -85,7 +96,7 @@ Abstract argumentation is a key area of AI for modeling and reasoning about conf
 
 ## How It Works
 
-The evaluation process is driven by the `LogicTester` class. For each selected AF generator and size, it performs the following steps:
+The evaluation process is driven by the `LLMTester` class. For each selected AF generator and size, it performs the following steps:
 
 1.  **Base Test**: An initial AF is generated, and the LLM is queried for its extensions. The response is checked for fundamental correctness (e.g., conflict-freeness, admissibility).
 2.  **Metamorphic Tests**: The base AF is transformed using one of the metamorphic relations, and the LLM is queried again with this new AF. The results from the original and the transformed AF are then compared to see if they satisfy the expected logical relationship.

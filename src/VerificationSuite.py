@@ -11,8 +11,6 @@ from py_arg.algorithms.semantics.get_grounded_extension import get_grounded_exte
 from py_arg.algorithms.semantics.get_preferred_extensions import get_preferred_extensions
 from py_arg.algorithms.semantics.get_stable_extensions import get_stable_extensions
 
-from report_generator import ReportGenerator
-
 # Load environment variables from .env file
 load_dotenv()
 

@@ -1,6 +1,6 @@
+import os
 from typing import Dict, List
 import pandas as pd
-import openpyxl
 
 class ReportGenerator:
     """Generates an Excel report from the test results using pandas."""
@@ -35,11 +35,20 @@ class ReportGenerator:
 
     def export_to_excel(self, filename: str = "evaluation_results.xlsx", results: Dict = None):
         """Exports the full results to a multi-sheet Excel file."""
+        
+        reports_dir = os.path.join("..", "reports")
+    
+        # Create the reports directory if it doesn't exist
+        os.makedirs(reports_dir, exist_ok=True)
+        
+        # Combine the directory path with the filename
+        full_path = os.path.join(reports_dir, filename)
+        
         print(f"\nExporting results to {filename}...")
         if results is None:
             raise ValueError("No results to export. Please provide the results dictionary.")
-        
-        with pd.ExcelWriter(filename, engine='openpyxl') as writer:
+
+        with pd.ExcelWriter(full_path, engine='openpyxl') as writer:
             # sample_result = results['af_name'][n][..tests..]
             for af_name, n_results in results.items():
                 
@@ -82,5 +91,5 @@ class ReportGenerator:
                 # Use the AF name for the sheet, trimming if it's too long for Excel
                 sheet_name = af_name[:31]
                 df.to_excel(writer, sheet_name=sheet_name)
-        
-        print(f"Export complete. Results saved to '{filename}'.")
+
+        print(f"Export complete. Results saved to 'reports/{filename}.xlsx'.")

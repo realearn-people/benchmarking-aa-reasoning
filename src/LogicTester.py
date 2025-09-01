@@ -1,3 +1,27 @@
+from py_arg.abstract_argumentation_classes.abstract_argumentation_framework import AbstractArgumentationFramework
+from py_arg.algorithms.semantics.get_complete_extensions import get_complete_extensions
+from py_arg.algorithms.semantics.get_grounded_extension import get_grounded_extension
+from py_arg.algorithms.semantics.get_preferred_extensions import get_preferred_extensions
+from py_arg.algorithms.semantics.get_stable_extensions import get_stable_extensions
+
+from af_utils import (
+    apply_isomorphism,
+    apply_fundamental_consistency,
+    apply_modularity,
+    apply_defense_dynamics,
+    generate_no_conflict,
+    generate_linear_attack_chain,
+    generate_cycle,
+    generate_single_target_multiple_attackers,
+    generate_single_attack_multiple_defenders,
+    generate_disconnected_symmetric_pairs
+)
+
+from typing import Dict, List, Callable
+
+from VerificationSuite import VerificationSuite
+from ReportGenerator import ReportGenerator
+import json
 
 class LogicTester:
     """Given perfectly valid set of extensions, all test cases should pass."""
@@ -7,10 +31,6 @@ class LogicTester:
         self.ns = ns
         self.verification_suite = VerificationSuite()
         self.results = {}
-        
-    # def _get_llm_response_for_af(self, af: AbstractArgumentationFramework) -> Dict[str, List[List[str]]]:
-    #     raw_response = self.llm_client.query_llm_for_extensions(repr(af))
-    #     return self.llm_client.parse_output_to_extensions(raw_response) 
     
     def _get_llm_response_for_af(self, af: AbstractArgumentationFramework) -> Dict[str, List[List[str]]]:
         all_expected_ext_sets = {}
@@ -156,8 +176,23 @@ class LogicTester:
                     }
         
         report_generator = ReportGenerator()
-        report_generator.export_to_excel(f'logic_tester.xlsx', results=self.results)
+        report_generator.export_to_excel(f'LogicValidationReport.xlsx', results=self.results)
         
 
         print("\nEvaluation run complete.")
 
+# Assume that all calculated extensions are correct, all test cases must pass.
+
+af_generators_to_test = {
+    "no_conflict": generate_no_conflict,
+    "linear_attack_chain": generate_linear_attack_chain,
+    "cycle": generate_cycle,
+    "single_target_multiple_attackers": generate_single_target_multiple_attackers,
+    "single_attack_multiple_defenders": generate_single_attack_multiple_defenders,
+    "symmetric_disconnected": generate_disconnected_symmetric_pairs,
+}
+
+sizes_to_test = [4, 8]
+
+logic_tester = LogicTester(af_generators=af_generators_to_test, ns=sizes_to_test)
+logic_tester.run_evaluation()

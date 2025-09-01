@@ -1,5 +1,4 @@
 import unittest
-import random
 
 from af_utils import (
     generate_no_conflict,

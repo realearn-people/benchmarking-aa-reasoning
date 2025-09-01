@@ -1,7 +1,7 @@
 from py_arg.abstract_argumentation_classes.abstract_argumentation_framework import AbstractArgumentationFramework
 from py_arg.abstract_argumentation_classes.argument import Argument
 from py_arg.abstract_argumentation_classes.defeat import Defeat
-from typing import Callable, Tuple, List
+from typing import Callable, Tuple
 import random
 
 ###--------------------------- AF GENERATORS ---------------------------###
