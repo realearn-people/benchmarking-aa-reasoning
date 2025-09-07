@@ -39,7 +39,7 @@ The methodology is twofold:
 1.  **Clone the repository:**
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/realearn-people/benchmarking-aa-reasoning.git
 cd benchmarking-aa-reasoning
 ```
 
